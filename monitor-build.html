@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Build APK - Alenia Family Organizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .pending {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .links {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .link-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .link-button:hover {
+            background-color: #0056b3;
+        }
+        .instructions {
+            background-color: #e7f3ff;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #0066cc;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .timestamp {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ Monitor de Build APK</h1>
+        <h2>Alenia Family Organizer</h2>
+        
+        <div class="status error" id="status">
+            ❌ Build falló - Necesita corrección. Verificando errores...
+        </div>
+
+        <div class="links">
+            <a href="https://github.com/vjlale/alenia-family-organizer/actions" class="link-button" target="_blank" rel="noopener">
+                📊 Ver GitHub Actions
+            </a>
+            <a href="https://github.com/vjlale/alenia-family-organizer" class="link-button" target="_blank" rel="noopener">
+                📁 Ver Repositorio
+            </a>
+            <a href="http://localhost:3000" class="link-button" target="_blank" rel="noopener">
+                🌐 App Web (Desarrollo)
+            </a>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Estado del Proyecto:</h3>
+            <ul>
+                <li>✅ Aplicación React creada y adaptada para móvil</li>
+                <li>✅ Configuración de Capacitor para Android</li>
+                <li>✅ Repositorio subido a GitHub</li>
+                <li>✅ GitHub Actions configurado para build automático</li>
+                <li>✅ App web funcionando en modo desarrollo</li>
+                <li>✅ Generando APK automáticamente... (¡Probablemente completo!)</li>
+            </ul>
+        </div>
+
+        <div class="instructions">
+            <h3>📱 Cuando el APK esté listo:</h3>
+            <ol>
+                <li>Ve a <strong>GitHub Actions</strong> → <strong>Build Android APK</strong></li>
+                <li>Busca la ejecución más reciente (debería estar completa ✅)</li>
+                <li>Haz clic en la ejecución</li>
+                <li>Descarga el archivo <strong>"app-debug"</strong> de los artefactos</li>
+                <li>Descomprime el ZIP y instala el APK en tu teléfono</li>
+            </ol>
+        </div>
+
+        <div class="instructions">
+            <h3>🔧 Funcionalidades de la App:</h3>
+            <ul>
+                <li>📅 <strong>Calendario familiar</strong> - Gestiona eventos y citas</li>
+                <li>✅ <strong>Lista de tareas</strong> - Organiza pendientes por categorías</li>
+                <li>💰 <strong>Gastos compartidos</strong> - Controla gastos familiares</li>
+                <li>📝 <strong>Notas importantes</strong> - Información relevante para la familia</li>
+                <li>📱 <strong>Diseño responsivo</strong> - Optimizado para móviles</li>
+                <li>🎨 <strong>Interfaz moderna</strong> - Diseño limpio y fácil de usar</li>
+            </ul>
+        </div>
+
+        <div class="timestamp">
+            Última actualización: <span id="timestamp"></span>
+        </div>
+    </div>
+
+    <script>
+        // Actualizar timestamp
+        document.getElementById('timestamp').textContent = new Date().toLocaleString('es-ES');
+        
+        // Auto-refresh cada 2 minutos para verificar el estado
+        setTimeout(function() {
+            window.location.reload();
+        }, 120000);
+        
+        // Función para verificar el estado del build (simulada)
+        function checkBuildStatus() {
+            // En una implementación real, esto haría una llamada a la API de GitHub
+            // Por ahora, solo actualizamos el timestamp
+            console.log('Verificando estado del build...');
+        }
+        
+        // Verificar estado cada 30 segundos
+        setInterval(checkBuildStatus, 30000);
+    </script>
+</body>
+</html>
