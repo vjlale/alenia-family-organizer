@@ -191,9 +191,13 @@ function AuthScreen({ onLogin }) {
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center p-4 safe-area-top safe-area-bottom">
             <div className="w-full max-w-md">
                 <div className="text-center mb-8">
-                    <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500 mb-2">
-                        Alenia Family
-                    </h1>
+                    <div className="flex justify-center mb-4">
+                        <img 
+                            src="/assets/images/logo-main.png" 
+                            alt="Alenia Family Organizer" 
+                            className="h-16 w-auto object-contain"
+                        />
+                    </div>
                     <p className="text-gray-300">Organiza tu familia de manera inteligente</p>
                 </div>
 
@@ -448,19 +452,26 @@ function Header({ familyId, familyInfo, onLogout }) {
 
     return (
         <header className="bg-gray-900/80 backdrop-blur-sm p-4 shadow-lg flex justify-between items-center flex-shrink-0">
-            <div>
-                <h1 className="text-lg sm:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500">
-                    {familyInfo ? `Familia ${familyInfo.dadName} y ${familyInfo.momName}` : 'Cargando...'}
-                </h1>
-                <div className="flex items-center gap-2 mt-1">
-                    <p className="text-xs text-gray-400">Código: {familyId}</p>
-                    <button onClick={handleCopy} title="Copiar código" className="touch-manipulation">
-                        {copied ? (
-                            <span className="text-green-400 text-xs">¡Copiado!</span>
-                        ) : (
-                            <CopyIcon className="h-4 w-4 text-gray-500 hover:text-white transition-colors"/>
-                        )}
-                    </button>
+            <div className="flex items-center gap-3">
+                <img 
+                    src="/assets/images/logo-secondary.png" 
+                    alt="Alenia" 
+                    className="h-8 w-auto object-contain"
+                />
+                <div>
+                    <h1 className="text-lg sm:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500">
+                        {familyInfo ? `Familia ${familyInfo.dadName} y ${familyInfo.momName}` : 'Cargando...'}
+                    </h1>
+                    <div className="flex items-center gap-2 mt-1">
+                        <p className="text-xs text-gray-400">Código: {familyId}</p>
+                        <button onClick={handleCopy} title="Copiar código" className="touch-manipulation">
+                            {copied ? (
+                                <span className="text-green-400 text-xs">¡Copiado!</span>
+                            ) : (
+                                <CopyIcon className="h-4 w-4 text-gray-500 hover:text-white transition-colors"/>
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>
             <button 
@@ -714,7 +725,14 @@ function EventFormModal({ onClose, onSave, selectedDate, familyInfo }) {
             <div className="bg-gray-800 rounded-t-2xl sm:rounded-2xl shadow-2xl w-full sm:w-full sm:max-w-md mx-0 sm:mx-4 max-h-[90vh] overflow-y-auto scroll-container">
                 <div className="p-6">
                     <div className="flex justify-between items-center mb-6">
-                        <h2 className="text-xl font-bold">Nuevo Evento</h2>
+                        <div className="flex items-center gap-3">
+                            <img 
+                                src="/assets/images/logo-secondary.png" 
+                                alt="Alenia" 
+                                className="h-6 w-auto object-contain"
+                            />
+                            <h2 className="text-xl font-bold">Nuevo Evento</h2>
+                        </div>
                         <button 
                             onClick={onClose} 
                             className="text-gray-400 hover:text-white transition-colors touch-manipulation"
