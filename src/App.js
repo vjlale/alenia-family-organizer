@@ -24,15 +24,17 @@ const ListIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height
 const BookOpenIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
 const WandIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 4V2"/><path d="M15 10V8"/><path d="M12.5 6.5L14 5"/><path d="M12.5 11.5L14 13"/><path d="M5 4v2.5"/><path d="M5 10V8"/><path d="M7.5 6.5L6 5"/><path d="M7.5 11.5L6 13"/><path d="M10 15h.01"/><path d="M10 20h.01"/><path d="M8.5 17.5L7 19"/><path d="M12.5 17.5L14 19"/><path d="M22 15h-2.5"/><path d="M17 15h-1.5"/><path d="M19.5 12.5L21 14"/><path d="M16.5 12.5L15 14"/><path d="m9 12 2-2 2 2 2-2-2-2-2 2-2-2 2 2z"/></svg>;
 
-// --- Configuración de Firebase ---
+// --- Configuración Local (Sin Firebase) ---
+const useLocalStorage = true; // Cambiar a false cuando tengas Firebase configurado
+
 const firebaseConfig = {
-  // Configuración de Firebase aquí
-  apiKey: "tu-api-key",
-  authDomain: "tu-auth-domain",
-  projectId: "tu-project-id",
-  storageBucket: "tu-storage-bucket",
-  messagingSenderId: "tu-messaging-sender-id",
-  appId: "tu-app-id"
+  // Configuración de Firebase aquí (cuando esté listo)
+  apiKey: "demo-api-key",
+  authDomain: "demo-auth-domain",
+  projectId: "demo-project-id",
+  storageBucket: "demo-storage-bucket",
+  messagingSenderId: "demo-messaging-sender-id",
+  appId: "demo-app-id"
 };
 
 const appId = 'alenia-family-organizer';
@@ -47,7 +49,7 @@ const useHaptics = () => {
       try {
         await Haptics.impact({ style });
       } catch (error) {
-        console.log('Haptics not supported');
+        console.log('Haptics not supported - App.js:52');
       }
     }
   };
@@ -76,7 +78,7 @@ export default function App() {
                 try {
                     await signInAnonymously(auth);
                 } catch (error) { 
-                    console.error("Error en el inicio de sesión anónimo:", error); 
+                    console.error("Error en el inicio de sesión anónimo: - App.js:81", error); 
                 }
             }
             setIsAuthReady(true);
@@ -151,7 +153,7 @@ function AuthScreen({ onLogin }) {
                 onLogin(familyId);
             }
         } catch (error) {
-            console.error("Error al crear familia:", error);
+            console.error("Error al crear familia: - App.js:156", error);
             setError("Error al crear la familia. Inténtalo de nuevo.");
             await triggerImpact(ImpactStyle.Medium);
         }
@@ -180,7 +182,7 @@ function AuthScreen({ onLogin }) {
                 await triggerImpact(ImpactStyle.Medium);
             }
         } catch (error) {
-            console.error("Error al unirse a la familia:", error);
+            console.error("Error al unirse a la familia: - App.js:185", error);
             setError("Error al unirse a la familia. Inténtalo de nuevo.");
             await triggerImpact(ImpactStyle.Medium);
         }
@@ -344,7 +346,7 @@ function MainApp({ familyId, onLogout }) {
             setIsModalOpen(false);
             await triggerImpact();
         } catch (error) { 
-            console.error("Error al agregar evento: ", error); 
+            console.error("Error al agregar evento:  - App.js:349", error); 
             await triggerImpact(ImpactStyle.Medium);
         }
     };
@@ -370,7 +372,7 @@ function MainApp({ familyId, onLogout }) {
             }
             await triggerImpact();
         } catch (error) {
-            console.error("Error al eliminar evento:", error);
+            console.error("Error al eliminar evento: - App.js:375", error);
             await triggerImpact(ImpactStyle.Medium);
         }
         setEventToDelete(null);
@@ -445,7 +447,7 @@ function Header({ familyId, familyInfo, onLogout }) {
             await triggerImpact();
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
-            console.error('Error al copiar:', err);
+            console.error('Error al copiar: - App.js:450', err);
             await triggerImpact(ImpactStyle.Medium);
         }
     };
