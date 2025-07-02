@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Setup Node.js
@@ -28,29 +28,34 @@ jobs:
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
+      with:
+        api-level: 33
+        build-tools: 33.0.0
 
-    - name: Install dependencies
+    - name: Install Node dependencies
       run: npm ci
 
     - name: Build React app
       run: npm run build
 
-    - name: Add Android platform
-      run: npx cap add android
+    - name: Install Capacitor CLI
+      run: npm install -g @capacitor/cli
 
-    - name: Sync Capacitor
+    - name: Sync Capacitor (without adding platform)
       run: npx cap sync android
 
-    - name: Set executable permissions
+    - name: Grant execute permission to gradlew
       run: chmod +x android/gradlew
 
-    - name: Build Android APK
+    - name: Clean and build APK
+      working-directory: android
       run: |
-        cd android
+        ./gradlew clean
         ./gradlew assembleDebug --no-daemon --stacktrace
 
-    - name: Upload APK
+    - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
-        name: app-debug
+        name: android-apk
         path: android/app/build/outputs/apk/debug/app-debug.apk
+        retention-days: 30
